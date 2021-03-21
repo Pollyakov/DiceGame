@@ -4,7 +4,7 @@ class Player extends React.Component {
  state= {};
  render () {
      return (
-         <div>Privet!
+         <div>I am Player {this.props.name}
          </div>
      );
  
