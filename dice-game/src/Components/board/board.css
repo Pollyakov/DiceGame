@@ -1,0 +1,6 @@
+.board {
+    position: absolute;
+    margin: auto;
+    background-color: burlywood ;
+    z-index: 1;
+}

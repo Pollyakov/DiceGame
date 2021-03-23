@@ -1,6 +1,7 @@
 import React from "react";
-import Player from "./Player";
-import Button from "./Button";
+import Player from "../Player/Player";
+import "./board.css";
+
 
 class Board extends React.Component {
   constructor(props) {
@@ -29,9 +30,11 @@ class Board extends React.Component {
         <Player />
         <Player />
         <textarea name="dicesScore" value={this.state.dices}></textarea>
-        <button onClick={() => this.roll()}>Roll</button>
-        <Button text="Hold" />
-        <Button text="New Game" />
+        <button className= 'btn' onClick={() => this.roll()}>Roll</button>
+        <button className= 'btn' text="Hold" >Hold </button>
+        <button className= 'btn' text="New Game" >New Game</button>
+
+
       </div>
     );
     }
