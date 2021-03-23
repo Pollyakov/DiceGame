@@ -1,62 +1,84 @@
 import React from "react";
 import Player from "../Player/Player";
-import Dice from '../Dice/Dice';
+import Dice from "../Dice/Dice";
 import "./board.css";
-
 
 class Board extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       totalToWin: 100,
-      dices: [0, 0],
+      dices: [null, null],
       turn: 0,
-      scores: [
+      players: [
         {
-           currentScore: 0,
-           globalScore: 0,
+          currentScore: 0,
+          globalScore: 0,
+          wins: 0,
         },
         {
-           currentScore: 1,
-           globalScore: 1
-          }
-      ]
+          currentScore: 1,
+          globalScore: 1,
+          wins: 0,
+        },
+      ],
     };
   }
 
+  handleNewGame = () => {
+    console.log("New Game starts!");
+  };
+  handleHold = () => {
+    alert("Points went to global level");
+  };
+  //handleTotaltoWin = (values) => {};
+
+  handleRollDice = () => {
+    const diceResults = this.state.dices.map((die) => {
+      return Math.floor(Math.random() * 6) + 1;
+    });
+    let sum = diceResults.reduce((acc, val)=>{return acc+val});
+    const playersCopy = [...this.state.players];
+    //naschitivanie ochkov v current:
+    playersCopy[this.state.turn].currentScore += sum;
+    //proverka, chto net dvojnih
+  
+  const areDoubles  = diceResults.length !== new Set(diceResults).size;
+  const nextTurn = 1 - this.state.turn;
+   if (areDoubles) {
+     playersCopy[this.state.turn].currentScore = 0;
+   };
+   return this.setState({
+     turn: nextTurn,
+     dices : [null, null],
+   });
+  };
+
   render() {
-   
+    // const renderPlayers = () => {
+    //   console.log( playersCopy[this.state.turn].currentScore);
+    // };
     return (
-      <div className= 'board'>
+      <div className="board">
+        {/* {renderPlayers()} */}
         <textarea name="dicesScore" value={this.state.dices}></textarea>
         <Player name="player 1" />
-         <Dice/>
+        <Dice />
         <Player name="player 2" />
-        
-        <button className= 'btn' onClick={() => this.roll()}>Roll</button>
-        <button className= 'btn' text="Hold" >Hold </button>
-        <button className= 'btn' text="New Game" >New Game</button>
+
+        <button className="btn" onClick={() => this.handleRollDice()}>
+          Roll
+        </button>
+        <button className="btn" text="Hold">
+          Hold
+        </button>
+        <button className="btn" text="New Game">
+          New Game
+        </button>
       </div>
     );
-    }
-    roll() {
-    const a = Math.floor(Math.random() * 6) + 1;
-    const b = Math.floor(Math.random() * 6) + 1;
-    //var scores = this.state.scores;//[{},{}]
-    var turn = this.state.turn;
-    console.log("Turn ", turn);
-    if (a===b) {
-      console.log ("inside if");
-      this.setState(prevState => {
-        let score = Object.assign({}, prevState.score);  // creating copy of state variable jasper
-        score.turn = 2;                     // update the name property, assign a new value                 
-        return { turn };                                 // return new object jasper object
-      })
-    } 
-   this.setState({dices: [a,b]});
-   console.log(this.state.scores[turn]);  
   }
-  }
-  
+}
 
 export default Board;
