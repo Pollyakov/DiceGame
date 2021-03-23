@@ -1,5 +1,6 @@
 import React from "react";
 import Player from "../Player/Player";
+import Dice from '../Dice/Dice';
 import "./board.css";
 
 
@@ -26,15 +27,15 @@ class Board extends React.Component {
   render() {
    
     return (
-      <div>
-        <Player />
-        <Player />
+      <div className= 'board'>
         <textarea name="dicesScore" value={this.state.dices}></textarea>
+        <Player name="player 1" />
+         <Dice/>
+        <Player name="player 2" />
+        
         <button className= 'btn' onClick={() => this.roll()}>Roll</button>
         <button className= 'btn' text="Hold" >Hold </button>
         <button className= 'btn' text="New Game" >New Game</button>
-
-
       </div>
     );
     }

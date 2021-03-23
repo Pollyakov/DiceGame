@@ -1,10 +1,11 @@
 import React from 'react';
+import './player.css';
 
 class Player extends React.Component {
  state= {};
  render () {
      return (
-         <div>I am Player {this.props.name}
+         <div className = "player">{this.props.name}
          </div>
      );
  

@@ -1,10 +1,14 @@
 .background {
+  color: #012a9e;
+  font-family: 'Fredoka One', cursive;
   background: url(../../Assets/background.jpg) no-repeat center
     center/cover;
-  height: 100vh;
+  height: 100VH;
   width: 100%;
-  -webkit-filter: brightness(0.85);
-  filter: brightness(0.85);
-  opacity: 50%;
-  position: relative;
+  /* -webkit-filter: brightness(0.85);
+  filter: brightness(0.85); */
+  /* opacity: 50%; */
+  display:flex;
+  justify-content: center;
+  align-items: center;
 }
