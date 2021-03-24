@@ -7,8 +7,8 @@ import dice5 from '../../Assets/dice-5.png';
 import dice6 from '../../Assets/dice-6.png';
 import './dice.css';
 
-const Dice = (props) => {
-  const diceImages = [
+class Dice extends React.Component {
+  diceImages = [
       <img src = {dice1} alt= 'die1'></img>,
       <img src = {dice2} alt= 'die2'></img>,
       <img src = {dice3} alt= 'die3'></img>,
@@ -16,12 +16,14 @@ const Dice = (props) => {
       <img src = {dice5} alt= 'die5'></img>,
       <img src = {dice6} alt= 'die6'></img>
   ];
+  render() {
   return (
       <div className='dice'>
-          {diceImages[0]}
-          {diceImages[1]}
+         {this.diceImages[this.props.dice[0]]}
+         {this.diceImages[this.props.dice[1]]}
       </div>
   );
-};
+}
+}
 
 export default Dice;

@@ -1,18 +1,13 @@
-
-
 .board {
-    width:40rem;
-    font-family: 'Fredoka One', cursive;
-    margin: auto;
-    border-radius: 4px;
-    background-color: rgb(247, 156, 37) ;
-    z-index: 1;
-    /* top: 10rem;
-    left: 10rem; */
-    display:flex;
-    height: 60 rem;
+  width: 40rem;
+  font-family: "Fredoka One", cursive;
+  margin: auto;
+  border-radius: 4px;
+  background-color: rgb(247, 156, 37);
+  z-index: 1;
+  display: flex;
+  height: 60 rem;
   justify-content: center;
-    align-items: center; 
-    flex-wrap: wrap-reverse; 
-
+  align-items: center;
+  flex-wrap: wrap-reverse;
 }

@@ -89,9 +89,9 @@ class Board extends React.Component {
         {/* {renderPlayers()} */}
         
         <Player name="player 2" />
-        <textarea name="dicesScore" value={this.state.dices}></textarea>
+        {/* <textarea name="dicesScore" value={this.state.dices}></textarea> */}
         <Player name="player 1" />
-        <Dice />
+        <Dice dice ={this.state.dices} />
         <GameActions 
           roll={this.onRollClick}
           hold={this.onHoldClick}
