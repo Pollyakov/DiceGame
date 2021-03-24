@@ -1,6 +1,7 @@
 import React from "react";
 import Player from "../Player/Player";
 import Dice from "../Dice/Dice";
+import GameActions from "../GameActions/GameActions";
 import "./board.css";
 
 class Board extends React.Component {
@@ -26,33 +27,32 @@ class Board extends React.Component {
     };
   }
 
-  handleNewGame = () => {
+  onResetClick = () => {
     console.log("New Game starts!");
   };
-  handleHold = () => {
+  onHoldClick = () => {
     alert("Points went to global level");
   };
-  //handleTotaltoWin = (values) => {};
+  onPointsChange = (values) => {alert("Points changed")};
 
-  handleRollDice = () => {
+  onRollClick = () => {
     const diceResults = this.state.dices.map((die) => {
       return Math.floor(Math.random() * 6) + 1;
     });
-    let sum = diceResults.reduce((acc, val)=>{return acc+val});
+    let sum = diceResults.reduce((acc, val) => {
+      return acc + val;
+    });
     const playersCopy = [...this.state.players];
-    //naschitivanie ochkov v current:
     playersCopy[this.state.turn].currentScore += sum;
-    //proverka, chto net dvojnih
-  
-  const areDoubles  = diceResults.length !== new Set(diceResults).size;
-  const nextTurn = 1 - this.state.turn;
-   if (areDoubles) {
-     playersCopy[this.state.turn].currentScore = 0;
-   };
-   return this.setState({
-     turn: nextTurn,
-     dices : [null, null],
-   });
+    const areDoubles = diceResults.length !== new Set(diceResults).size;
+    const nextTurn = 1 - this.state.turn;
+    if (areDoubles) {
+      playersCopy[this.state.turn].currentScore = 0;
+    }
+    return this.setState({
+      turn: nextTurn,
+      dices: [null, null],
+    });
   };
 
   render() {
@@ -66,16 +66,12 @@ class Board extends React.Component {
         <Player name="player 1" />
         <Dice />
         <Player name="player 2" />
+        <GameActions 
+          roll={this.onRollClick}
+          hold={this.onHoldClick}
+          reset={this.onResetClick}
+          pointsChange={this.onPointsChange}/>
 
-        <button className="btn" onClick={() => this.handleRollDice()}>
-          Roll
-        </button>
-        <button className="btn" text="Hold">
-          Hold
-        </button>
-        <button className="btn" text="New Game">
-          New Game
-        </button>
       </div>
     );
   }
