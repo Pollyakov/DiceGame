@@ -48,7 +48,20 @@ class Board extends React.Component {
   };
 
   onHoldClick = () => {
-    alert("Points went to global level");
+    if (this.state.dices[0] !== this.state.dices[1]) {
+      const UpdateGlobalScore = this.state.players.map((player, i) => {
+        if (i === this.state.turn) {
+          player.globalScore = player.globalScore + player.currentScore;
+          player.currentScore = 0;
+          if (player.globalScore >= this.state.pointsToWin)
+            this.setState({ winner: this.state.turn });
+        }
+        return player;
+      });
+  
+      this.setState({ players: UpdateGlobalScore, turn: 1 - this.state.turn });
+    
+    };
   };
 
   onRollClick = () => {
@@ -61,7 +74,7 @@ class Board extends React.Component {
     const playersCopy = [...this.state.players];
     playersCopy[this.state.turn].currentScore += sum;
     const areDoubles = diceResults.length !== new Set(diceResults).size;
-    const nextTurn = 1 - this.state.turn;
+    var nextTurn = 1 - this.state.turn;
     if (areDoubles) {
       playersCopy[this.state.turn].currentScore = 0;
       return this.setState({
