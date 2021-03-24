@@ -28,12 +28,28 @@ class Board extends React.Component {
   }
 
   onResetClick = () => {
-    console.log("New Game starts!");
+    this.setState({
+      totalToWin: 100,
+      dices: [null, null],
+      turn: 0,
+      players: [
+        {
+          currentScore: 0,
+          globalScore: 0,
+          wins: 0,
+        },
+        {
+          currentScore: 1,
+          globalScore: 1,
+          wins: 0,
+        },
+      ],
+    });
   };
+
   onHoldClick = () => {
     alert("Points went to global level");
   };
-  onPointsChange = (values) => {alert("Points changed")};
 
   onRollClick = () => {
     const diceResults = this.state.dices.map((die) => {
@@ -48,24 +64,34 @@ class Board extends React.Component {
     const nextTurn = 1 - this.state.turn;
     if (areDoubles) {
       playersCopy[this.state.turn].currentScore = 0;
-    }
-    return this.setState({
-      turn: nextTurn,
-      dices: [null, null],
-    });
+      return this.setState({
+        turn: nextTurn,
+        dices: [null, null],
+      });
+      };
+
+    this.setState({
+       dices: [...diceResults],
+       players: playersCopy,
+     }); 
+    
+  };
+  
+  onPointsChange = (value) => {
+    if (isNaN(value)) alert('You must enter a number!');
+    else this.setState({ pointsForWin: value });
   };
 
   render() {
-    // const renderPlayers = () => {
-    //   console.log( playersCopy[this.state.turn].currentScore);
-    // };
+ 
     return (
       <div className="board">
         {/* {renderPlayers()} */}
+        
+        <Player name="player 2" />
         <textarea name="dicesScore" value={this.state.dices}></textarea>
         <Player name="player 1" />
         <Dice />
-        <Player name="player 2" />
         <GameActions 
           roll={this.onRollClick}
           hold={this.onHoldClick}

@@ -2,6 +2,7 @@ import React from 'react';
 import './gameActions.css';
 
 class GameActions extends React.Component {
+ 
   render() {
     return (
       <div className="actions">
