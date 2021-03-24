@@ -6,6 +6,8 @@ class Player extends React.Component {
  render () {
      return (
          <div className = "player">{this.props.name}
+          <div>Round Score: {this.props.players.currentScore}</div>
+           <div>Total Score: {this.props.players.globalScore}</div>
          </div>
      );
  

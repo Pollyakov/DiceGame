@@ -91,8 +91,8 @@ class Board extends React.Component {
   };
   
   onPointsChange = (value) => {
-    if (isNaN(value)) alert('You must enter a number!');
-    else this.setState({ pointsForWin: value });
+    if (isNaN(value)) alert('Please enter a numbers only');
+    else this.setState({ totalToWin: value });
   };
 
   render() {
@@ -101,9 +101,14 @@ class Board extends React.Component {
       <div className="board">
         {/* {renderPlayers()} */}
         
-        <Player name="player 2" />
-        {/* <textarea name="dicesScore" value={this.state.dices}></textarea> */}
-        <Player name="player 1" />
+        <Player name="player B"
+        players={this.state.players[1]}
+        turn={this.state.turn} />
+        <Player
+         name="player A" 
+         players={this.state.players[0]}
+         turn={this.state.turn}/>
+
         <Dice dice ={this.state.dices} />
         <GameActions 
           roll={this.onRollClick}
